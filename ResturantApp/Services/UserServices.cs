@@ -57,7 +57,7 @@ namespace ResturantApp.Services
             var checkUserName = await CheckUserName(user.UserName);
             if(checkUserName == false)
             {
-                user.Password = LogicHandler.Encrypt(user.Password);
+                user.Password = DePasswordHandler.Encrypt(user.Password);
                 user.RegisterDate = DateTime.Now;
 
                 _context.UserInfo.Add(user);

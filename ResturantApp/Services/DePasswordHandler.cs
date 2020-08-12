@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ResturantApp.Services
 {
-    public static class LogicHandler
+    public static class DePasswordHandler
     {
         public static string Encrypt(string clearText)
         {

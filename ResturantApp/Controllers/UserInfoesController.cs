@@ -31,7 +31,7 @@ namespace ResturantApp.Controllers
         {
 
             var userModel = _mapper.Map<UserInfo>(loginDto);
-            var password = LogicHandler.Encrypt(userModel.Password);
+            var password = DePasswordHandler.Encrypt(userModel.Password);
             userModel = await _repository.Authenticate(userModel.UserName, password);
             if (userModel == null)
             {
