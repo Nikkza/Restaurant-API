@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using ResturantApp.Helpers;
 using ResturantApp.Models;
 using ResturantApp.Services;
@@ -62,6 +63,10 @@ namespace ResturantApp
                     ValidateAudience = false
                 };
             });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc(name: "v1", new OpenApiInfo { Title = "RestAPI", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +76,16 @@ namespace ResturantApp
             {
                 app.UseDeveloperExceptionPage();
             }
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Restaurants API V1");
+                c.RoutePrefix = "swaggerUI";
+            });
 
             app.UseHttpsRedirection();
 
@@ -84,7 +99,7 @@ namespace ResturantApp
                 .AllowCredentials()); // allow credentials
 
             app.UseAuthentication();
-            app.UseAuthorization();
+         
 
             app.UseEndpoints(x => x.MapControllers());
         }
