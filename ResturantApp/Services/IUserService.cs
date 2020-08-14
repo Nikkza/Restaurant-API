@@ -1,4 +1,5 @@
-﻿using ResturantApp.Models;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using ResturantApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +7,10 @@ using System.Threading.Tasks;
 
 namespace ResturantApp.Services
 {
-    public interface IUserService<T>
+    public interface IUserService
     {
-        Task<T> Authenticate(string username, string password);
-        Task<IEnumerable<T>> GetAllUsers();
+        Task<UserInfo> Authenticate(string username, string password);
         Task<bool> CheckUserName(string userName);
-        Task<T> RegisterUser(UserInfo user);
-        Task<T> GetUserById(int id);
-        bool SaveChanges();
+        
     }
 }

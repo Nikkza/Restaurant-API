@@ -38,7 +38,8 @@ namespace ResturantApp
             .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped<IUserService<UserInfo>, UserServices>();
+            services.AddScoped<IUserService, UserServices>();
+            services.AddScoped<IContex,UserServices>();
 
 
             var appSettingsSection = Configuration.GetSection("AppSettings");

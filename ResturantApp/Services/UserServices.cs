@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace ResturantApp.Services
 {
-    public class UserServices : IUserService<UserInfo>
+    public class UserServices : IUserService, IContex
     {
         private readonly Appsettings _appSettings;
         private readonly RestDBContext _context;
@@ -52,22 +52,32 @@ namespace ResturantApp.Services
 
             return await Task.FromResult(user);
         }
-        public async Task<UserInfo> RegisterUser(UserInfo user)
+        public async Task<object> RegisterObject(object user) 
         {
-            var checkUserName = await CheckUserName(user.UserName);
+            UserInfo usertest = user as UserInfo;
+
+            var checkUserName = await CheckUserName(usertest.UserName);
             if(checkUserName == false)
             {
-                user.Password = DePasswordHandler.Encrypt(user.Password);
-                user.RegisterDate = DateTime.Now;
+                usertest.Password = DePasswordHandler.Encrypt(usertest.Password);
+                usertest.RegisterDate = DateTime.Now;
 
-                _context.UserInfo.Add(user);
-                SaveChanges(); ;
+                CreateObject(user);
+                SaveChanges(); 
             }
             return await Task.FromResult(user);
         }
+
+        public void CreateObject(object userInfo)
+        {
+            if (userInfo == null)
+                throw new ArgumentNullException(nameof(userInfo));
+            _context.Add(userInfo);
+        }
         public async Task<bool> CheckUserName(string userName) => await Task.FromResult(_context.UserInfo.Any(x => x.UserName == userName));
-        public async Task<IEnumerable<UserInfo>> GetAllUsers() => await Task.FromResult(_context.UserInfo);
-        public async Task<UserInfo> GetUserById(int id) => await Task.FromResult(_context.UserInfo.FirstOrDefaultAsync(x => x.UserId == id)).Result;
+        public async Task<IEnumerable<object>> GetAllObjects() => await Task.FromResult(_context.UserInfo);
+        public async Task<object> GetObjectById(int id) => await Task.FromResult(_context.UserInfo.FirstOrDefaultAsync(x => x.UserId == id)).Result;
         public bool SaveChanges() => (_context.SaveChanges() >= 0);
+
     }
 }

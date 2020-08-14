@@ -17,12 +17,14 @@ namespace ResturantApp.Controllers
     [ApiController]
     public class UserInfoesController : ControllerBase
     {
-        private readonly IUserService<UserInfo> _repository;
+        private readonly IUserService _repository;
+        private readonly IContex _context;
         private readonly IMapper _mapper;
-        public UserInfoesController(IUserService<UserInfo> repository, IMapper mapper)
+        public UserInfoesController(IUserService repository, IMapper mapper, IContex context)
         {
             _repository = repository;
             _mapper = mapper;
+            _context = context;
 
         }
         [AllowAnonymous]
@@ -45,7 +47,7 @@ namespace ResturantApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserInfo>>> GetUserInfo()
         {
-            var allUsers = await _repository.GetAllUsers();
+            var allUsers = await _context.GetAllObjects();
             if (allUsers != null)
             {
                 return Ok(_mapper.Map<IEnumerable<UserReadDto>>(allUsers));
@@ -57,7 +59,7 @@ namespace ResturantApp.Controllers
         [HttpGet("{id}", Name = "GetUserInfo")]
         public async Task<ActionResult<UserInfo>> GetUserInfo(int id)
         {
-            var userById = await _repository.GetUserById(id);
+            var userById = await _context.GetObjectById(id);
             if (userById != null)
                 return Ok(_mapper.Map<UserReadDto>(userById));
             return NotFound();
@@ -68,14 +70,13 @@ namespace ResturantApp.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateUser(int id,[FromBody] UpdateUserDto updateUserDto)
         {
-            var checkUserFRomRepo = await _repository.GetUserById(id);
+            var checkUserFRomRepo = await _context.GetObjectById(id);
             if(checkUserFRomRepo == null)
             {
                 return NotFound();
             }
            _mapper.Map(updateUserDto, checkUserFRomRepo);
-            _repository.SaveChanges();
-
+            _context.SaveChanges();
             return NoContent();
         }
         [AllowAnonymous]
@@ -83,7 +84,7 @@ namespace ResturantApp.Controllers
         public async Task<ActionResult<UserReadDto>> Register(RegisterUserDto registerUserDto)
         {
             var registerModel = _mapper.Map<UserInfo>(registerUserDto);
-            var registerUser = await _repository.RegisterUser(registerModel);
+            var registerUser = await _context.RegisterObject(registerModel);
             var readUserModel = _mapper.Map<UserReadDto>(registerUser);
             return CreatedAtRoute(nameof(GetUserInfo), new { Id = readUserModel.UserId }, readUserModel);
         }
