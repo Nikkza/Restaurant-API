@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ResturantApp.Models;
+using ResturantApp.Services;
 
 namespace ResturantApp.Controllers
 {
@@ -14,98 +16,96 @@ namespace ResturantApp.Controllers
     [ApiController]
     public class RestaurantsController : ControllerBase
     {
-        private readonly RestDBContext _context;
+        private readonly IMapper _mapper;
+        private readonly IContex _context;
 
-        public RestaurantsController(RestDBContext context)
+
+        public RestaurantsController(IMapper mapper, IContex context)
         {
+            _mapper = mapper;
             _context = context;
         }
 
         // GET: api/Restaurants
-        [Authorize(Roles = "User")]
+        //[Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Restaurant>>> GetRestaurant()
         {
-            return await _context.Restaurant.ToListAsync();
+            return Ok(await _context.GetAllObjects());
         }
 
         // GET: api/Restaurants/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Restaurant>> GetRestaurant(int id)
         {
-            var restaurant = await _context.Restaurant.FindAsync(id);
+            var restaurant = await _context.GetObjectById(id);
 
             if (restaurant == null)
             {
                 return NotFound();
             }
 
-            return restaurant;
+            return (ActionResult<Restaurant>)restaurant;
         }
 
         // PUT: api/Restaurants/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutRestaurant(int id, Restaurant restaurant)
-        {
-            if (id != restaurant.RestId)
-            {
-                return BadRequest();
-            }
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutRestaurant(int id, Restaurant restaurant)
+        //{
+        //    if (id != restaurant.RestId)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _context.Entry(restaurant).State = EntityState.Modified;
+        //    _context.Entry(restaurant).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RestaurantExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!RestaurantExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         // POST: api/Restaurants
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Restaurant>> PostRestaurant(Restaurant restaurant)
-        {
-            _context.Restaurant.Add(restaurant);
-            await _context.SaveChangesAsync();
+        //[HttpPost]
+        //public async Task<ActionResult<Restaurant>> PostRestaurant(Restaurant restaurant)
+        //{
+        //    _context.Restaurant.Add(restaurant);
+        //    await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRestaurant", new { id = restaurant.RestId }, restaurant);
-        }
+        //    return CreatedAtAction("GetRestaurant", new { id = restaurant.RestId }, restaurant);
+        //}
 
         // DELETE: api/Restaurants/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Restaurant>> DeleteRestaurant(int id)
-        {
-            var restaurant = await _context.Restaurant.FindAsync(id);
-            if (restaurant == null)
-            {
-                return NotFound();
-            }
+        //[HttpDelete("{id}")]
+        //public async Task<ActionResult<Restaurant>> DeleteRestaurant(int id)
+        //{
+        //    var restaurant = await _context.Restaurant.FindAsync(id);
+        //    if (restaurant == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.Restaurant.Remove(restaurant);
-            await _context.SaveChangesAsync();
+        //    _context.Restaurant.Remove(restaurant);
+        //    await _context.SaveChangesAsync();
 
-            return restaurant;
-        }
-
-        private bool RestaurantExists(int id)
-        {
-            return _context.Restaurant.Any(e => e.RestId == id);
-        }
+        //    return restaurant;
+        //}
     }
 }

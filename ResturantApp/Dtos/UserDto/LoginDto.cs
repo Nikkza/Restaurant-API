@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ResturantApp.Dtos
+namespace ResturantApp.Dtos.UserDto
 {
     public class LoginDto
     {

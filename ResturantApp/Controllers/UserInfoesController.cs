@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ResturantApp.Models;
 using ResturantApp.Services;
 using AutoMapper;
 using ResturantApp.Dtos;
+using ResturantApp.Dtos.UserDto;
 
 namespace ResturantApp.Controllers
 {

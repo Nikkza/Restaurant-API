@@ -39,7 +39,9 @@ namespace ResturantApp
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IUserService, UserServices>();
-            services.AddScoped<IContex,UserServices>();
+            services.AddScoped<IContex, UserServices>();
+            services.AddScoped<IContex, RestaurantService>();
+
 
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -100,7 +102,8 @@ namespace ResturantApp
                 .AllowCredentials()); // allow credentials
 
             app.UseAuthentication();
-         
+            app.UseAuthorization();
+
 
             app.UseEndpoints(x => x.MapControllers());
         }

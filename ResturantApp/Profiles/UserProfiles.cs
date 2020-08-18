@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ResturantApp.Dtos;
+using ResturantApp.Dtos.UserDto;
 using ResturantApp.Models;
 using System;
 using System.Collections.Generic;

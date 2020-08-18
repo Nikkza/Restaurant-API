@@ -50,7 +50,7 @@ namespace ResturantApp.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.Token = tokenHandler.WriteToken(token);
 
-            return await Task.FromResult(user);
+            return user;
         }
         public async Task<object> RegisterObject(object user) 
         {
@@ -65,7 +65,7 @@ namespace ResturantApp.Services
                 CreateObject(user);
                 SaveChanges(); 
             }
-            return await Task.FromResult(user);
+            return user;
         }
 
         public void CreateObject(object userInfo)
@@ -74,9 +74,9 @@ namespace ResturantApp.Services
                 throw new ArgumentNullException(nameof(userInfo));
             _context.Add(userInfo);
         }
-        public async Task<bool> CheckUserName(string userName) => await Task.FromResult(_context.UserInfo.Any(x => x.UserName == userName));
-        public async Task<IEnumerable<object>> GetAllObjects() => await Task.FromResult(_context.UserInfo);
-        public async Task<object> GetObjectById(int id) => await Task.FromResult(_context.UserInfo.FirstOrDefaultAsync(x => x.UserId == id)).Result;
+        public async Task<bool> CheckUserName(string userName) => await _context.UserInfo.AnyAsync(x => x.UserName == userName);
+        public async Task<IEnumerable<object>> GetAllObjects() => await _context.UserInfo.ToListAsync();
+        public async Task<object> GetObjectById(int id) => await _context.UserInfo.FirstOrDefaultAsync(x => x.UserId == id);
         public bool SaveChanges() => (_context.SaveChanges() >= 0);
 
     }
