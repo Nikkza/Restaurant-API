@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ResturantApp.Helpers;
-using ResturantApp.Models;
+using RestaurantApp.Helpers;
+using RestaurantApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ResturantApp.Services
+namespace RestaurantApp.Services
 {
     public class RestaurantService : IContex
     {

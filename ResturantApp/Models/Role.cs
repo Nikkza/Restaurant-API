@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ResturantApp.Models
+namespace RestaurantApp.Models
 {
     public static class Role
     {

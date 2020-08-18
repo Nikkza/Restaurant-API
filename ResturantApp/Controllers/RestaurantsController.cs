@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ResturantApp.Models;
-using ResturantApp.Services;
+using RestaurantApp.Models;
+using RestaurantApp.Services;
 
-namespace ResturantApp.Controllers
+namespace RestaurantApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

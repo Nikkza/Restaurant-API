@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ResturantApp.Models
+namespace RestaurantApp.Models
 {
     public partial class Restaurant
     {

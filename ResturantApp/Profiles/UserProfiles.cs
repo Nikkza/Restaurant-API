@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
-using ResturantApp.Dtos;
-using ResturantApp.Dtos.UserDto;
-using ResturantApp.Models;
+using RestaurantApp.Dtos.UserDto;
+using RestaurantApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ResturantApp.Profiles
+namespace RestaurantApp.Profiles
 {
     public class UserProfiles : Profile
     {

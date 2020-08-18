@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ResturantApp.Services
+namespace RestaurantApp.Services
 {
     public static class DePasswordHandler
     {

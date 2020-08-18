@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ResturantApp": {
+    "RestaurantApp": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swaggerUI",

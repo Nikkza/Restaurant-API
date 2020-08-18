@@ -1,11 +1,11 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using ResturantApp.Models;
+using RestaurantApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ResturantApp.Services
+namespace RestaurantApp.Services
 {
     public interface IUserService
     {

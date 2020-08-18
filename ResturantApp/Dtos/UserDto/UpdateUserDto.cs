@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ResturantApp.Dtos.UserDto
+namespace RestaurantApp.Dtos.UserDto
 {
     public class UpdateUserDto
     {

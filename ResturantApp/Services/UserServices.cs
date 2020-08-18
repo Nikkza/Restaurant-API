@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using ResturantApp.Helpers;
-using ResturantApp.Models;
+using RestaurantApp.Helpers;
+using RestaurantApp.Models;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -12,7 +12,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ResturantApp.Services
+namespace RestaurantApp.Services
 {
     public class UserServices : IUserService, IContex
     {

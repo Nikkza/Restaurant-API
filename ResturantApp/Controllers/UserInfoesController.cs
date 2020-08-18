@@ -2,13 +2,13 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ResturantApp.Models;
-using ResturantApp.Services;
+using RestaurantApp.Models;
+using RestaurantApp.Services;
 using AutoMapper;
-using ResturantApp.Dtos;
-using ResturantApp.Dtos.UserDto;
+using RestaurantApp.Dtos;
+using RestaurantApp.Dtos.UserDto;
 
-namespace ResturantApp.Controllers
+namespace RestaurantApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

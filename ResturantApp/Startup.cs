@@ -9,13 +9,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using ResturantApp.Helpers;
-using ResturantApp.Models;
-using ResturantApp.Services;
+using RestaurantApp.Helpers;
+using RestaurantApp.Models;
+using RestaurantApp.Services;
 using System;
 using System.Text;
 
-namespace ResturantApp
+namespace RestaurantApp
 {
     public class Startup
     {

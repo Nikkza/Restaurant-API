@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace ResturantApp.Models
+namespace RestaurantApp.Models
 {
     public partial class RestDBContext : DbContext
     {
